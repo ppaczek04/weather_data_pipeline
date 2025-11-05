@@ -1,0 +1,15 @@
+# --- Core Python packages ---
+requests
+pandas
+sqlalchemy
+pyodbc
+
+# --- dbt core + SQL Server adapter ---
+dbt-core
+dbt-sqlserver
+
+# --- Orchestration (Prefect) ---
+prefect
+
+# --- Optional utilities ---
+python-dotenv

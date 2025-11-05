@@ -1,0 +1,11 @@
+# Virtual environment
+weather_env/
+
+# Data files
+weather_data.csv
+
+# System / IDE files
+__pycache__/
+*.pyc
+.vscode/
+.DS_Store

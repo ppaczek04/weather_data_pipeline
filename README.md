@@ -20,24 +20,24 @@ The workflow is orchestrated using **Prefect**, allowing automatic and scheduled
 ---
 
 ## 🧱 3. Planned Data Architecture
-    +---------------------------+
-    |      Weather API          |
-    +-------------+-------------+
-                  |
-                  v
+        +---------------------------+
+        |      Weather API          |
+        +-------------+-------------+
+                    |
+                    v
         [Python] -> Bronze Layer 
-              (Raw Data)
-                  |
-                  v
-         [dbt] -> Silver Layer 
-         (Cleaned & Validated)
-                  |
-                  v
-         [dbt] -> Gold Layer 
-         (Aggregated & Business Views)
-                  |
-                  v
-           [Power BI Dashboard]
+                (Raw Data)
+                    |
+                    v
+            [dbt] -> Silver Layer 
+            (Cleaned & Validated)
+                    |
+                    v
+            [dbt] -> Gold Layer 
+            (Aggregated & Business Views)
+                    |
+                    v
+            [Power BI Dashboard]
 
 - **Bronze Layer** – stores raw API data as-is.  
 - **Silver Layer** – cleans, validates, and standardizes the data.  
