@@ -1,3 +1,16 @@
+```
+For day: 17.11.2025 this proceudre is outdated as it was doing bulk insert from 
+one big weather_data.csv file, which is prone to totally fail when only small part
+of the csv file cannot be digested by script. 
+
+Thus, i decided to save each api call in seperate csv file and load them one by one,
+with the usage of:
+	pypyodbc library
+	(specifically, conection to databse and cursor)
+```
+
+
+
 CREATE OR ALTER PROCEDURE bronze.load_bronze AS
 BEGIN
 	DECLARE @start_time DATETIME, @end_time DATETIME, @batch_start_time DATETIME, @batch_end_time DATETIME; 

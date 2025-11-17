@@ -3,6 +3,7 @@ requests
 pandas
 sqlalchemy
 pyodbc
+pypyodbc
 
 # --- dbt core + SQL Server adapter ---
 dbt-core

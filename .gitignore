@@ -3,6 +3,7 @@ weather_env/
 
 # Data files
 weather_data.csv
+data/
 
 # System / IDE files
 __pycache__/
