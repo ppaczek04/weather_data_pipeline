@@ -1,5 +1,6 @@
 import requests
 import pandas as pd
+import os
 from datetime import datetime, timezone
 
 # Lista miast z koordynatami
@@ -16,7 +17,8 @@ def fetch_weather(city):
         "latitude": city["lat"],
         "longitude": city["lon"],
         "hourly": "temperature_2m,relative_humidity_2m,precipitation",
-        "timezone": "UTC"
+        "timezone": "UTC",
+        "past_days": 0
     }
 
     response = requests.get(API_URL, params=params, timeout=30)
@@ -39,7 +41,14 @@ def fetch_weather(city):
 
 def main():
     all_data = pd.concat([fetch_weather(c) for c in CITIES], ignore_index=True)
-    all_data.to_csv("weather_data.csv", index=False, encoding="utf-8")
+
+    
+    os.makedirs("data", exist_ok=True)
+
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    filename_with_timestamp_id = f"weather_data_{timestamp}.csv"
+    full_saving_data_path = os.path.join("data", filename_with_timestamp_id)
+    all_data.to_csv(full_saving_data_path, index=False, encoding="utf-8")
     print("\n✅ Weather data saved to weather_data.csv")
 
 if __name__ == "__main__":
