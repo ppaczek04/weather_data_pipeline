@@ -14,11 +14,12 @@ IF OBJECT_ID('bronze.weather_api_data', 'U') IS NOT NULL
 GO
 
 CREATE TABLE bronze.weather_api_data (
-    timestamp NVARCHAR(50),
-    temperature_c NVARCHAR(50),
-    humidity_pct NVARCHAR(50),
-    precip_mm,city NVARCHAR(50),
-    latitude NVARCHAR(50),
-    longitude NVARCHAR(50),
-    load_dts_utc NVARCHAR(50)
+    timestamp           NVARCHAR(50),
+    temperature_c       NVARCHAR(50),
+    humidity_pct        NVARCHAR(50),
+    precip_mm           NVARCHAR(50),
+    city                NVARCHAR(50),
+    latitude            NVARCHAR(50),
+    longitude           NVARCHAR(50),
+    load_dts_utc        NVARCHAR(50)
 );
