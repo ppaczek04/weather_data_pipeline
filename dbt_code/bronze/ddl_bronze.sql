@@ -15,11 +15,11 @@ GO
 
 CREATE TABLE bronze.weather_api_data (
     timestamp           NVARCHAR(50),
-    temperature_c       NVARCHAR(50),
-    humidity_pct        NVARCHAR(50),
-    precip_mm           NVARCHAR(50),
+    temperature_c       FLOAT,
+    humidity_pct        INT,
+    precip_mm           FLOAT,
     city                NVARCHAR(50),
-    latitude            NVARCHAR(50),
-    longitude           NVARCHAR(50),
+    latitude            FLOAT,
+    longitude           FLOAT,
     load_dts_utc        NVARCHAR(50)
 );

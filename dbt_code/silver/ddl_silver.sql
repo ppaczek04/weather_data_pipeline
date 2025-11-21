@@ -14,12 +14,13 @@ IF OBJECT_ID('silver.weather_api_data', 'U') IS NOT NULL
 GO
 
 CREATE TABLE silver.weather_api_data (
-    timestamp           DATETIME2,
-    temperature_c       FLOAT,
-    humidity_pct        INT,
-    precip_mm           FLOAT,
-    city                NVARCHAR(50),
-    latitude            FLOAT,
-    longitude           FLOAT,
-    load_dts_utc        DATETIME2
+    timestamp_day      DATE,
+    timestamp_hour     TINYINT,
+    temperature_c      FLOAT,
+    humidity_pct       INT,
+    precip_mm          FLOAT,
+    city               NVARCHAR(50),
+    latitude           FLOAT,
+    longitude          FLOAT,
+    load_dts_utc       DATETIME2
 );
