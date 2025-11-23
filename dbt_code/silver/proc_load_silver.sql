@@ -24,8 +24,13 @@ BEGIN
     BEGIN TRY
         SET @batch_start_time = GETDATE();
         PRINT '================================================';
-        PRINT 'Loading Silver Layer';
+        PRINT '            Loading Silver Layer';
         PRINT '================================================';
+
+        -- we remove index, if it exists from previous procedure runs 
+        -- to insert data faster
+        DROP INDEX IF EXISTS IX_silver_weather_city_day_hour 
+            ON silver.weather_api_data;
 
         PRINT '>> Truncating Table: silver.weather_api_data'
         TRUNCATE TABLE silver.weather_api_data;
@@ -43,7 +48,7 @@ BEGIN
         )
         SELECT
             CAST(replace(timestamp, 'T', ' ') AS DATE) AS timestamp_day,
-            DATEPART(HOUR, replace(timestamp, 'T', ' ')) AS timestamp_hour,
+            DATEPART(HOUR, TRY_CONVERT(datetime2, REPLACE(timestamp, 'T', ' '))) AS timestamp_hour,
             temperature_c,
             humidity_pct,
             precip_mm,
@@ -52,6 +57,12 @@ BEGIN
             longitude,
             load_dts_utc
         FROM bronze.weather_api_data;
+
+        -- after silver layer is ready, we add index to optimise
+        -- the performance of queries on silver and gold layer
+        CREATE INDEX IX_silver_weather_city_day_hour
+        ON silver.weather_api_data (city, timestamp_day, timestamp_hour);
+
         SET @batch_end_time = GETDATE();
 		PRINT '=========================================='
 		PRINT 'Loading Silver Layer is Completed';

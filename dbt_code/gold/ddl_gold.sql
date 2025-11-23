@@ -19,6 +19,7 @@ Usage:
 
 IF OBJECT_ID('gold.city_day_aggregate', 'V') IS NOT NULL
     DROP VIEW gold.city_day_aggregate;
+    
 GO
 
 -- no surogate key as no fact-dim table sturcture
@@ -38,6 +39,7 @@ GO
 
 IF OBJECT_ID('gold.city_latest_forecast', 'V') IS NOT NULL
     DROP VIEW gold.city_latest_forecast;
+
 GO
 
 -- No surrogate key as no fact-dim structure needed here
