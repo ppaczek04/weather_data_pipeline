@@ -47,7 +47,7 @@ BEGIN
             load_dts_utc
         )
         SELECT
-            CAST(replace(timestamp, 'T', ' ') AS DATE) AS timestamp_day,
+            TRY_CONVERT(date, REPLACE(timestamp, 'T', ' '))  AS timestamp_day,
             DATEPART(HOUR, TRY_CONVERT(datetime2, REPLACE(timestamp, 'T', ' '))) AS timestamp_hour,
             temperature_c,
             humidity_pct,
@@ -76,5 +76,4 @@ BEGIN
         PRINT 'Error Message' + CAST(ERROR_NUMBER() AS NVARCHAR);
         PRINT '=============================='
     END CATCH
-
 END
