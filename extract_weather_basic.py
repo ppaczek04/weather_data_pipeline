@@ -49,7 +49,7 @@ def main():
     filename_with_timestamp_id = f"weather_data_{timestamp}.csv"
     full_saving_data_path = os.path.join("data", filename_with_timestamp_id)
     all_data.to_csv(full_saving_data_path, index=False, encoding="utf-8")
-    print("\n✅ Weather data saved to weather_data.csv")
+    print("\n[OK] Weather data saved to weather_data.csv")
 
 if __name__ == "__main__":
     main()
