@@ -51,7 +51,7 @@ def load_bronze() -> None:
     logger.info("Starting BRONZE layer loading (script_load_bronze.py)")
 
     import sys
-    cmd = [sys.executable, "script_load_bronze.py"]
+    cmd = [sys.executable, os.path.join("dbt_code","bronze", "script_load_bronze.py")]
 
     result = subprocess.run(
         cmd,
