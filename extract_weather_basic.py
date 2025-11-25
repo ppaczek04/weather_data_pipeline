@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 import os
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 # Lista miast z koordynatami
 CITIES = [
@@ -13,12 +13,15 @@ API_URL = "https://api.open-meteo.com/v1/forecast"
 
 def fetch_weather(city):
     """Pobiera dane pogodowe z Open-Meteo dla danego miasta"""
+    yesterday = (datetime.utcnow().date() - timedelta(days=1))
     params = {
         "latitude": city["lat"],
         "longitude": city["lon"],
         "hourly": "temperature_2m,relative_humidity_2m,precipitation",
         "timezone": "UTC",
-        "past_days": 0
+        "start_date": str(yesterday),
+        "end_date": str(yesterday),
+        # "past_days": 
     }
 
     response = requests.get(API_URL, params=params, timeout=30)
