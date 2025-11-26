@@ -1,0 +1,14 @@
+first terminal:
+cd C:\Users\DELL\Desktop\weather_data_pipeline
+.\weather_env\Scripts\Activate.ps1
+prefect server start
+
+
+second terminal:
+cd C:\Users\DELL\Desktop\weather_data_pipeline
+.\weather_env\Scripts\Activate.ps1
+
+# (if you havent set the adress to the same as your server on temrinal 1 is hosted yet)
+prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api
+
+python orchestration\flow_weather_daily.py

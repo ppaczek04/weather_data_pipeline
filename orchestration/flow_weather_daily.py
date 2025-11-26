@@ -23,6 +23,7 @@ def extract_yesterday_weather() -> str:
     yesterday = (datetime.now() - timedelta(days=1)).date()
     logger.info(f"Fetching weather data for: {yesterday}")
 
+    #use the same python interpreter as the Prefect flow
     import sys
     cmd = [sys.executable, "extract_weather_basic.py"]
 
@@ -50,6 +51,7 @@ def load_bronze() -> None:
     logger = get_run_logger()
     logger.info("Starting BRONZE layer loading (script_load_bronze.py)")
 
+    #use the same python interpreter as the Prefect flow
     import sys
     cmd = [sys.executable, os.path.join("dbt_code","bronze", "script_load_bronze.py")]
 
@@ -131,5 +133,11 @@ def weather_daily_flow():
     logger.info("=== weather_daily_flow completed ===")
 
 
+# if __name__ == "__main__":
+#     weather_daily_flow()
+
 if __name__ == "__main__":
-    weather_daily_flow()
+    weather_daily_flow.serve(
+        name="weather_daily_local",
+        cron="13 21 * * *"
+    )

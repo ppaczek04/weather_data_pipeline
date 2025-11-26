@@ -27,6 +27,7 @@ conn_str = f"""
     Trusted_Connection=yes;
 """.strip()
 
+# we create connection to the database
 conn = odbc.connect(conn_str)
 print("Connected sccesfully to database:", conn)
 
@@ -34,6 +35,7 @@ print("Connected sccesfully to database:", conn)
 data_file_folder = os.path.join(os.getcwd(), "data") 
 data_files = [f for f in os.listdir(data_file_folder) if f.endswith(".csv")]
 
+# we create cursor object to execute our SQL queries in our database
 cursor = conn.cursor()
 
 for data_file in data_files:
@@ -47,6 +49,7 @@ for data_file in data_files:
         conn.rollback()  # in case of error we take back wrong data
         print(f"ERROR in file {data_file}: {e}")
 
+#we close cursor and connection to our database after finishing
 cursor.close()
 conn.close()
 print("All files loaded.")

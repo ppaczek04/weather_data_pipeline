@@ -3,7 +3,7 @@ import pandas as pd
 import os
 from datetime import datetime, timezone, timedelta
 
-# Lista miast z koordynatami
+# List of cities with coordinates
 CITIES = [
     {"city": "Warsaw", "lat": 52.23, "lon": 21.01},
     {"city": "Krakow", "lat": 50.06, "lon": 19.94},
@@ -12,7 +12,7 @@ CITIES = [
 API_URL = "https://api.open-meteo.com/v1/forecast"
 
 def fetch_weather(city):
-    """Pobiera dane pogodowe z Open-Meteo dla danego miasta"""
+    """Downloading wather data from Open-Meteo API for each city"""
     yesterday = (datetime.utcnow().date() - timedelta(days=1))
     params = {
         "latitude": city["lat"],
@@ -21,7 +21,7 @@ def fetch_weather(city):
         "timezone": "UTC",
         "start_date": str(yesterday),
         "end_date": str(yesterday),
-        # "past_days": 
+        # "past_days": 0
     }
 
     response = requests.get(API_URL, params=params, timeout=30)
@@ -34,6 +34,7 @@ def fetch_weather(city):
         "humidity_pct": data["hourly"]["relative_humidity_2m"],
         "precip_mm": data["hourly"]["precipitation"],
     })
+
     df["city"] = city["city"]
     df["latitude"] = city["lat"]
     df["longitude"] = city["lon"]
