@@ -19,6 +19,7 @@ CREATE TABLE bronze.weather_api_data (
     humidity_pct        INT,
     precip_mm           FLOAT,
     city                NVARCHAR(50),
+    state_name          NVARCHAR(50),
     latitude            FLOAT,
     longitude           FLOAT,
     load_dts_utc        NVARCHAR(50)

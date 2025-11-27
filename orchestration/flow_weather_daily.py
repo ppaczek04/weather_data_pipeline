@@ -139,5 +139,5 @@ def weather_daily_flow():
 if __name__ == "__main__":
     weather_daily_flow.serve(
         name="weather_daily_local",
-        cron="13 21 * * *"
+        cron="33 23 * * *"
     )

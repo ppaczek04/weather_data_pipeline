@@ -42,6 +42,7 @@ BEGIN
             humidity_pct,
             precip_mm,
             city,
+            state_name,
             latitude,
             longitude,
             load_dts_utc
@@ -53,6 +54,7 @@ BEGIN
             humidity_pct,
             precip_mm,
             city,
+            state_name,
             latitude,
             longitude,
             load_dts_utc
