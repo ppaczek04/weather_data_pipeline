@@ -79,4 +79,42 @@ These views include daily aggregations and the most recent forecast snapshots.
 Because they depend directly on Silver, they always remain up-to-date after each pipeline run.
 This architecture cleanly separates raw, processed, and analytical data while enabling a fully automated daily refresh powered by Prefect.
 
+## 5. Pipeline Monitoring with Prefect Web UI
+
+Prefect provides a powerful and user-friendly web interface that allows you to monitor, inspect, and debug your data pipelines in real time.  
+Below are examples from the monitoring dashboard used in this project.
+
+---
+
+### **Deployment schedule overview**
+
+This screen shows the active deployment (`weather_daily_local`) together with its schedule, next run time, and historical runs.
+
+It confirms that the pipeline is configured to run automatically every day at **20:00 (Europe/Warsaw)**.  
+You can also manually trigger runs, disable schedules, or inspect deployment metadata.
+
+![Deployment Schedule](resources/deployment_schedule.png)
+
+---
+
+### **Detailed pipeline run report**
+
+Here you can see a full execution timeline of a single pipeline run — including all task executions such as:
+
+- `extract_yesterday_weather`  
+- `load_bronze`  
+- `load_silver`  
+
+The graph shows precise timestamps, duration of each task, dependencies, and colored status indicators (green = success).  
+Below the timeline you can access structured logs, parameters, and artifacts generated during the run.
+
+This interface makes troubleshooting much easier and provides full observability over the orchestration layer.
+
+![Pipeline Run Report](resources/pipeline_run_report.png)
+
+---
+
+Together, these Prefect dashboards make it simple to validate whether the pipeline executed correctly, audit historical runs, monitor scheduling, and quickly diagnose issues — turning this project into a fully observable and maintainable data workflow.
+
+
 
