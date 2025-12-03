@@ -79,7 +79,7 @@ These views include daily aggregations and the most recent forecast snapshots.
 Because they depend directly on Silver, they always remain up-to-date after each pipeline run.
 This architecture cleanly separates raw, processed, and analytical data while enabling a fully automated daily refresh powered by Prefect.
 
-## 5. Pipeline Monitoring with Prefect Web UI
+## 4. Pipeline Monitoring with Prefect Web UI
 
 Prefect provides a powerful and user-friendly web interface that allows you to monitor, inspect, and debug your data pipelines in real time.  
 Below are examples from the monitoring dashboard used in this project.
@@ -90,7 +90,7 @@ Below are examples from the monitoring dashboard used in this project.
 
 This screen shows the active deployment (`weather_daily_local`) together with its schedule, next run time, and historical runs.
 
-It confirms that the pipeline is configured to run automatically every day at **20:00 (Europe/Warsaw)**.  
+It confirms that the pipeline is configured to run automatically every day at **20:00 (Europe/Warsaw)**.  (on the screen different hours, because of testing but in code uploaded code scheduled for 8pm CET (Polish time)).
 You can also manually trigger runs, disable schedules, or inspect deployment metadata.
 
 ![Deployment Schedule](resources/deployment_schedule.png)
@@ -116,5 +116,58 @@ This interface makes troubleshooting much easier and provides full observability
 
 Together, these Prefect dashboards make it simple to validate whether the pipeline executed correctly, audit historical runs, monitor scheduling, and quickly diagnose issues — turning this project into a fully observable and maintainable data workflow.
 
+## 5. Virtual environment setup:
+----------------
+UNDER  
+CONSTRUCTION  
+----------------
 
+
+## 6. How to Run
+
+This project uses a locally hosted Prefect server to orchestrate and schedule the daily weather ETL pipeline.  
+To fully run the system, you need **two terminals**.
+
+---
+
+### **🟩 Terminal 1 — Prefect Server (must stay ON 24/7)**
+
+This terminal runs the Prefect orchestration backend.  
+It **must remain open** so that Prefect can:
+
+- execute the daily scheduled run (every day at 20:00),
+- store pipeline history, logs, and statuses,
+- serve the Prefect Web UI at http://127.0.0.1:4200.
+
+```powershell
+cd C:\PATH_TO_THE_PROJECT_REPO
+.\weather_env\Scripts\Activate.ps1
+prefect server start
+```
+⚡ If you wanted to avoid keeping your PC on 24/7, Prefect Server can be hosted in the cloud (e.g., on a VPS). But in this project we run it locally.
+
+### **🟧 Terminal 2 — Pipeline Deployment Receiver**
+
+This terminal is used to register the Prefect deployment.
+Prefect keeps the deployment registered and scheduled and this terminal creates a 'Worker'
+that listens to the pipeline when the scheduled time comes.
+
+```powershell
+cd C:\PATH_TO_THE_PROJECT_REPO
+.\weather_env\Scripts\Activate.ps1
+python orchestration\flow_weather_daily.py
+```
+
+After running this command once:
+- the deployment is created,
+- Prefect begins scheduling it daily at 20:00,
+- you can close this second terminal.
+
+## 7. Future improvements:
+^^we could include creation of gold layer views in automation script  
+^^we could create a Power BI live dashboard depicting our data on map
+
+
+## 8. About me:
+Hi! I am an aspiring data engineer student and I hope you found value in my project.The main point of creating it was that I wanted to teach myself usage of orchestration tool to finally be able to bring my data piplines to life! Free of use, prefect tool, seemed the best choice to support me in making my first step in ETL Pipeline Automation journey! Thank You for Your time and wish you all best!
 
