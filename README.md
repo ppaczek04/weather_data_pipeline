@@ -117,11 +117,20 @@ This interface makes troubleshooting much easier and provides full observability
 Together, these Prefect dashboards make it simple to validate whether the pipeline executed correctly, audit historical runs, monitor scheduling, and quickly diagnose issues — turning this project into a fully observable and maintainable data workflow.
 
 ## 5. Virtual environment setup:
-----------------
-UNDER  
-CONSTRUCTION  
-----------------
 
+
+This project uses a dedicated Python virtual environment to isolate all dependencies listed in the `requirements.txt` file.  
+The **same environment (`weather_env`) is used in both terminals** —  
+for running the Prefect server (Terminal 1) and the deployment workflow (Terminal 2).
+
+
+Open PowerShell, navigate to the project directory, and run:
+
+```powershell
+python -m venv weather_env 
+.\weather_env\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
 
 ## 6. How to Run
 
