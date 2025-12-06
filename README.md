@@ -1,4 +1,4 @@
-# 🌤️ Weather Data Pipeline (SQL Server + Prefect ETL Orchiestration tool)
+# 🌤️ Weather Data Pipeline (SQL Server + Prefect ETL Orchestration tool)
 
 ## 1. Project Description
 
@@ -160,14 +160,14 @@ Still in SSMS, run the following scripts in the correct order:
 ```
 ddl_bronze.sql 
 ddl_silver.sql 
-proc_load_siler.sql
+proc_load_silver.sql
 ddl_gold.sql 
 ```
 This code will:  
 - create the Bronze table  
 - create the Silver table
-- create s silver schema later used in pipeline
-- create the Bronze views 
+- create the Silver layer procedure
+- create the Gold layer views 
 
 4️⃣ Update SQL connection settings in Python scripts
 
