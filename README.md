@@ -132,7 +132,66 @@ python -m venv weather_env
 pip install -r requirements.txt
 ```
 
-## 6. How to Run
+## 6. SQL Server Setup & Project initialization:
+
+Before running the pipeline, follow these steps to correctly configure the SQL Server environment and project structure.
+
+---
+
+1️⃣ Clone the repository
+
+Choose any folder on your machine and clone the project:
+
+```powershell
+cd C:\YOUR\CHOSEN\DIRECTORY
+git clone https://github.com/ppaczek04/weather_data_pipeline.git
+cd weather_data_pipeline
+```
+2️⃣ Initialize the SQL database
+
+Open SQL Server Management Studio (SSMS), connect to your local SQL Server instance, and execute:
+```
+init_database.sql
+```
+
+3️⃣ Create all table structures (DDL scripts)
+
+Still in SSMS, run the following scripts in the correct order:
+```
+ddl_bronze.sql 
+ddl_silver.sql 
+proc_load_siler.sql
+ddl_gold.sql 
+```
+This code will:  
+- create the Bronze table  
+- create the Silver table
+- create s silver schema later used in pipeline
+- create the Bronze views 
+
+4️⃣ Update SQL connection settings in Python scripts
+
+You must customize the SQL Server name to match your local machine.
+
+**In script_load_bronze.py:**
+```
+SERVER_NAME = r"YOUR_MACHINE_NAME\SQLEXPRESS"
+DATABASE_NAME = "Weather_DB"
+TARGET_TABLE = "bronze.weather_api_data"
+```
+
+**In flow_weather_daily.py:**
+```
+SERVER_NAME = r"YOUR_MACHINE_NAME\SQLEXPRESS"
+DATABASE_NAME = "Weather_DB"
+```
+
+**To find your actual SQL Server name, run this in SSMS:**
+```
+SELECT @@SERVERNAME;
+```
+
+## 7. How to Run a Pipeline
 
 This project uses a locally hosted Prefect server to orchestrate and schedule the daily weather ETL pipeline.  
 To fully run the system, you need **two terminals**.
@@ -172,11 +231,11 @@ After running this command once:
 - Prefect begins scheduling it daily at 20:00,
 - you can close this second terminal.
 
-## 7. Future improvements:
+## 8. Future improvements:
 ^^we could include creation of gold layer views in automation script  
 ^^we could create a Power BI live dashboard depicting our data on map
 
 
-## 8. About me:
+##  About me:
 Hi! I am an aspiring data engineer student and I hope you found value in my project.The main point of creating it was that I wanted to teach myself usage of orchestration tool to finally be able to bring my data piplines to life! Free of use, prefect tool, seemed the best choice to support me in making my first step in ETL Pipeline Automation journey! Thank You for Your time and wish you all best!
 
